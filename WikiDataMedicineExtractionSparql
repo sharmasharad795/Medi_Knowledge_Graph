@@ -1,0 +1,8 @@
+select ?medicine_uri ?medicine_uriLabel ?ConditionsTreatedLabel
+where
+{
+  ?medicine_uri wdt:P31 wd:Q12140.
+  OPTIONAL{?medicine_uri wdt:P2175 ?ConditionsTreated}.
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+  } 
