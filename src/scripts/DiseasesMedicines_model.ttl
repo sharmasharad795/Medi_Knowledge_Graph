@@ -1,0 +1,38 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix schema: <http://schema.org/> .
+@prefix my_ns: <http://dsci558.org/myfakenamespace#> .
+
+
+my_ns:Disease a schema:Class ;
+    rdfs:subClassOf schema:MedicalCondition ;
+    schema:name xsd:text;
+    schema:description xsd:text;
+    schema:relevantSpecialty schema:MedicalSpecialty;
+    schema:drug my_ns:Drugs;
+    my_ns:cause xsd:text;
+    schema:signOrSymptom schema:MedicalSignOrSymptom .
+
+my_ns:cause a rdf:Property ;
+    rdfs:domain my_ns:Disease ;
+    rdfs:range xsd:text.
+
+my_ns:Drugs a schema:Class ;
+    rdfs:subClassOf schema:Drug ;
+    schema:name xsd:text;
+    schema:nonProprietaryName xsd:text;
+    schema:administrationRoute xsd:text;
+    my_ns:Uses xsd:text;
+    my_ns:Side_Effects xsd:text .
+
+
+my_ns:Uses a rdf:Property ;
+    rdfs:domain my_ns:Drugs ;
+    rdfs:range xsd:text.
+
+my_ns:Side_Effects a rdf:Property ;
+    rdfs:domain my_ns:Drugs ;
+    rdfs:range xsd:text.
