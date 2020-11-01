@@ -1,0 +1,306 @@
+@prefix myns: <http://inf558.org/medgraph#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+myns:Q128581 a myns:disease ;
+    schema:description "cancer that originates in the mammary gland" ;
+    schema:drug myns:Q410513 ;
+    schema:name "breast cancer" ;
+    schema:relevantSpeciality myns:oncology .
+
+myns:Q172941 a myns:disease ;
+    myns:Cause "Helicobacter pylori infectious disease",
+        "non-steroidal anti-inflammatory drug" ;
+    schema:description "ulcer of an area of the gastrointestinal tract" ;
+    schema:name "peptic ulcer disease" ;
+    schema:relevantSpeciality myns:gastroenterology ;
+    schema:signOrSymptom "epigastric pain",
+        "heartburn",
+        "hematemesis",
+        "melena" .
+
+myns:Q18555222 a myns:disease ;
+    schema:description "endometrial cancer that is located in the tissue lining the uterus" ;
+    schema:drug myns:Q410513 ;
+    schema:name "endometrial carcinoma" ;
+    schema:relevantSpeciality myns:endocrinology,
+        myns:obstetrics_and_gynaecology,
+        myns:oncology .
+
+myns:Q18556123 a myns:disease ;
+    schema:description "Human disease" ;
+    schema:name "lipomatous cancer" .
+
+myns:Q18557946 a myns:disease ;
+    schema:description "Human disease" ;
+    schema:drug myns:Q193166 ;
+    schema:name "choline deficiency disease" ;
+    schema:relevantSpeciality myns:nutrition .
+
+myns:Q1869874 a myns:disease ;
+    schema:description "inability to sleep peacefully" ;
+    schema:drug myns:Q410608 ;
+    schema:name "insomnia" ;
+    schema:relevantSpeciality myns:neurology,
+        myns:psychiatry .
+
+myns:Uses a schema:property ;
+    rdfs:domain myns:Drugs ;
+    rdfs:range xsd:text .
+
+myns:age a schema:property ;
+    rdfs:domain myns:doctors ;
+    rdfs:range xsd:int .
+
+myns:cause a schema:property ;
+    rdfs:domain myns:Disease ;
+    rdfs:range xsd:text .
+
+myns:score rdfs:domain myns:doctors ;
+    rdfs:range xsd:float .
+
+myns:Disease a schema:Class ;
+    myns:cause xsd:text ;
+    schema:description xsd:text ;
+    schema:drug myns:Drugs ;
+    schema:name xsd:text ;
+    schema:relevantSpecialty myns:Specialty ;
+    schema:signOrSymptom schema:MedicalSignOrSymptom ;
+    rdfs:subClassOf schema:MedicalCondition .
+
+myns:Q193166 a myns:Drugs ;
+    myns:Uses "choline deficiency disease" ;
+    schema:administrationRoute "Administered via the mouth" ;
+    schema:name "Inner Ear Plus" ;
+    schema:nonProprietaryName "choline" .
+
+myns:Q410608 a myns:Drugs ;
+    myns:Uses "insomnia",
+        "me",
+        "nonene",
+        "you" ;
+    schema:administrationRoute "Administered via the mouth" ;
+    schema:name "Butisol 30 Mg Tablet Hypnotics" ;
+    schema:nonProprietaryName "butabarbital" .
+
+myns:angana-shah-y9q62hz a myns:doctors ;
+    myns:score "4.0" ;
+    schema:address "234 S El Molino Ave Apt 5 Pasadena, CA 91101" ;
+    schema:gender "Female" ;
+    schema:name "Angana Shah, LRD" ;
+    schema:telephone "(626) 991-2784" .
+
+myns:dr-armine-sarkisian-y387b a myns:doctors ;
+    myns:age "54" ;
+    myns:score "3.5" ;
+    schema:address "Armine Sarkisian MD: 800 S Central Ave Ste 304 Glendale, CA 91204" ;
+    schema:gender "Female" ;
+    schema:name "Dr. Armine Sarkisian, MD" .
+
+myns:dr-christopher-giza-x9jjf a myns:doctors ;
+    myns:age "55" ;
+    myns:score "5.0" ;
+    schema:address "Pediatrics Gastroenterology: 200 Medical Plz Ste 265 Los Angeles, CA 90095" ;
+    schema:gender "Male" ;
+    schema:name "Dr. Christopher Giza, MD" ;
+    schema:telephone "(310) 825-0867" .
+
+myns:dr-collins-liu-yr35r a myns:doctors ;
+    myns:score "5.0" ;
+    schema:address "Hcc I I 3000: 1520 San Pablo St Ste 3000 Los Angeles, CA 90033" ;
+    schema:gender "Male" ;
+    schema:name "Dr. Collins Liu, MD" ;
+    schema:telephone "(323) 442-6870" .
+
+myns:dr-david-quinn-3d6vp a myns:doctors ;
+    myns:age "57" ;
+    myns:score "5.0" ;
+    schema:address "USC Kenneth Norris Cancer Ctr: 1441 Eastlake Ave Los Angeles, CA 90089" ;
+    schema:gender "Male" ;
+    schema:name "Dr. David Quinn, MD" ;
+    schema:telephone "(323) 865-3000" .
+
+myns:dr-emily-dossett-2chfr a myns:doctors ;
+    myns:score "3.7" ;
+    schema:address "Lac Usc Medical Center: 2250 Alcazar St Ste 2200 Los Angeles, CA 90089" ;
+    schema:gender "Female" ;
+    schema:name "Dr. Emily Dossett, MD" ;
+    schema:telephone "(888) 515-3500" .
+
+myns:dr-geronimo-rodriguez-xj4gn a myns:doctors ;
+    myns:age "80" ;
+    myns:score "4.5" ;
+    schema:address "Geronimo G Rodriguez MD: 2705 Whittier Blvd Los Angeles, CA 90023" ;
+    schema:gender "Male" ;
+    schema:name "Dr. Geronimo Rodriguez, MD" ;
+    schema:telephone "(626) 577-8138" .
+
+myns:dr-huyen-pham-3cb8b a myns:doctors ;
+    myns:age "53" ;
+    myns:score "4.7" ;
+    schema:address "1516 San Pablo St Ste 3300 Los Angeles, CA 90033" ;
+    schema:gender "Male" ;
+    schema:name "Dr. Huyen Pham, MD" ;
+    schema:telephone "(323) 276-3705" .
+
+myns:dr-john-klutke-2qf9r a myns:doctors ;
+    myns:age "57" ;
+    myns:score "Not rated yet" ;
+    schema:address "Usc Reproductive Endocrine Laboratory: 1321 N Mission Rd Los Angeles, CA 90033" ;
+    schema:gender "Male" ;
+    schema:name "Dr. John Klutke, MD" ;
+    schema:telephone "(323) 226-4965" .
+
+myns:dr-kwang-park-2bwh5 a myns:doctors ;
+    myns:age "73" ;
+    myns:score "4.0" ;
+    schema:address "Hollywood Mental Health Center: 1224 Vine St Los Angeles, CA 90038" ;
+    schema:gender "Male" ;
+    schema:name "Dr. Kwang Park, MD" ;
+    schema:telephone "(323) 769-6100" .
+
+myns:dr-milica-stefanovic-3b3cn a myns:doctors ;
+    myns:age "66" ;
+    myns:score "4.6" ;
+    schema:address "Ambrose Hills Wellness: 4448 AMBROSE AVE Los Angeles, CA 90027" ;
+    schema:gender "Female" ;
+    schema:name "Dr. Milica Stefanovic, MD" ;
+    schema:telephone "(323) 644-1998" .
+
+myns:dr-patrick-mullin-xpppy a myns:doctors ;
+    myns:age "53" ;
+    myns:score "5.0" ;
+    schema:address "USC Perinatology: 2020 Zonal Ave Los Angeles, CA 90089" ;
+    schema:gender "Male" ;
+    schema:name "Dr. Patrick Mullin, MD" ;
+    schema:telephone "(323) 409-3306" .
+
+myns:dr-payman-khorrami-2lgfd a myns:doctors ;
+    myns:age "54" ;
+    myns:score "4.5" ;
+    schema:address "Payman Khorrami MD: 2080 Century Park E Ste 1108 Los Angeles, CA 90067" ;
+    schema:gender "Male" ;
+    schema:name "Dr. Payman Khorrami, MD" ;
+    schema:telephone "(310) 553-5588" .
+
+myns:dr-shahrooz-eshaghian-ysdgp a myns:doctors ;
+    myns:age "40" ;
+    myns:score "4.4" ;
+    schema:address "Compassionate Oncology Med Grp: 2080 Century Park E Ste 1005 Los Angeles, CA 90067" ;
+    schema:gender "Male" ;
+    schema:name "Dr. Shahrooz Eshaghian, MD" ;
+    schema:telephone "(310) 229-3555" .
+
+myns:dr-steven-schenkel-3kbxq a myns:doctors ;
+    myns:age "71" ;
+    myns:score "3.2" ;
+    schema:address "Steven S Schenkel MD: 116 N Robertson Blvd Los Angeles, CA 90048" ;
+    schema:gender "Male" ;
+    schema:name "Dr. Steven Schenkel, MD" ;
+    schema:telephone "(310) 659-8884" .
+
+myns:dr-vernon-williams-ypkwn a myns:doctors ;
+    myns:age "53" ;
+    myns:score "2.7" ;
+    schema:address "Vernon B. Williams, MD, Inc.: 6801 Park Ter Ste 500 Los Angeles, CA 90045" ;
+    schema:gender "Male" ;
+    schema:name "Dr. Vernon Williams, MD" ;
+    schema:telephone "(310) 665-7286" .
+
+myns:endocrinology a myns:Specialty ;
+    schema:name "endocrinology" .
+
+myns:gastroenterology a myns:Specialty ;
+    myns:doctors myns:dr-armine-sarkisian-y387b,
+        myns:dr-payman-khorrami-2lgfd,
+        myns:mary-pardee-xyp4pyw ;
+    schema:name "gastroenterology" .
+
+myns:kelly-stapleton-xynvvnh a myns:doctors ;
+    myns:score "Not rated yet" ;
+    schema:address "3630 E Imperial Hwy Lynwood, CA 90262" ;
+    schema:gender "Female" ;
+    schema:name "Kelly Stapleton, RD" ;
+    schema:telephone "(310) 900-7867" .
+
+myns:mary-pardee-xyp4pyw a myns:doctors ;
+    myns:score "Not rated yet" ;
+    schema:address "2080 Century Park E Los Angeles, CA 90067" ;
+    schema:gender "Female" ;
+    schema:name "Dr. Mary Pardee, NMD" ;
+    schema:telephone "(760) 932-0849" .
+
+myns:neurology a myns:Specialty ;
+    myns:doctors myns:dr-christopher-giza-x9jjf,
+        myns:dr-collins-liu-yr35r,
+        myns:dr-vernon-williams-ypkwn ;
+    schema:name "neurology" .
+
+myns:nutrition a myns:Specialty ;
+    myns:doctors myns:angana-shah-y9q62hz,
+        myns:kelly-stapleton-xynvvnh ;
+    schema:name "nutrition" .
+
+myns:obstetrics_and_gynaecology a myns:Specialty ;
+    myns:doctors myns:dr-geronimo-rodriguez-xj4gn,
+        myns:dr-john-klutke-2qf9r,
+        myns:dr-patrick-mullin-xpppy ;
+    schema:name "obstetrics and gynaecology" .
+
+myns:psychiatry a myns:Specialty ;
+    myns:doctors myns:dr-emily-dossett-2chfr,
+        myns:dr-kwang-park-2bwh5,
+        myns:dr-milica-stefanovic-3b3cn,
+        myns:dr-steven-schenkel-3kbxq ;
+    schema:name "psychiatry" .
+
+myns:side_effect a schema:property ;
+    rdfs:domain myns:side_effect ;
+    rdfs:range xsd:text .
+
+myns:Q410513 a myns:Drugs ;
+    myns:Uses "AIDS",
+        "anorexia",
+        "appetite",
+        "breast cancer",
+        "cachexia",
+        "endometrial carcinoma",
+        "loss",
+        "weight loss" ;
+    myns:side_effect "desire",
+        "sexual ability",
+        "their menstrual periods",
+        "unpredictable bleeding",
+        "women" ;
+    schema:administrationRoute "Administered via the mouth" ;
+    schema:name "Megestrol ACETATE" ;
+    schema:nonProprietaryName "megestrol" .
+
+myns:oncology a myns:Specialty ;
+    myns:doctors myns:dr-david-quinn-3d6vp,
+        myns:dr-huyen-pham-3cb8b,
+        myns:dr-shahrooz-eshaghian-ysdgp ;
+    schema:name "oncology" .
+
+myns:Drugs a schema:Class ;
+    myns:Uses xsd:text ;
+    myns:side_effect xsd:text ;
+    schema:administrationRoute xsd:text ;
+    schema:name xsd:text ;
+    schema:nonProprietaryName xsd:text ;
+    rdfs:subClassOf schema:Drug .
+
+myns:Specialty a schema:class ;
+    myns:doctors xsd:text ;
+    rdfs:subClassOf schema:MedicalSpecialty .
+
+myns:doctors a schema:class ;
+    myns:age xsd:text ;
+    myns:score xsd:float ;
+    schema:address xsd:text ;
+    schema:gender xsd:text ;
+    schema:name xsd:text ;
+    schema:telephone xsd:text ;
+    rdfs:subClassOf schema:Person .
+
