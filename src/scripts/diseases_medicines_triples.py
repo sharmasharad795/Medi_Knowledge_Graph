@@ -79,15 +79,15 @@ def generate_triples():
     medicine_details_dict = {}
 
     my_kg.add((disease, SCHEMA['signOrSymptom'], SCHEMA['MedicalSignOrSymptom']))
-    with open('MedicineLinkageDATA.jl','r') as f: # path of jl file containing details about medicines
+    with open('/Users/pratheek/Documents/Medi_Knowledge_Graph/OutputFiles/MedicineLinkageData.jl','r') as f: # path of jl file containing details about medicines
         for line in f:
             details = json.loads(line)
             medicine_details_dict[details['GenericName']] = details
-    with open('Doctor_Speciality.json', 'r') as f:
+    with open('/Users/pratheek/Documents/Medi_Knowledge_Graph/OutputFiles/HealthSpecialityLinkage.json', 'r') as f:
         speciality_details_dict = json.load(f)
 
     doctor_details_dict = {}
-    with open('doctor_testtest.jl','r') as f:
+    with open('/Users/pratheek/Documents/Medi_Knowledge_Graph/OutputFiles/DoctorData.jl','r') as f:
         for line in f:
             obj = json.loads(line)
             doctor_details_dict[obj['DoctorURI']] = obj
@@ -95,7 +95,7 @@ def generate_triples():
 
 
 
-    with open('wikidata_test.jl','r') as f:
+    with open('/Users/pratheek/Documents/Medi_Knowledge_Graph/OutputFiles/WikiDiseaseData.jl','r') as f:
         for line in f:
             obj = json.loads(line)
             unique_id = obj["DiseaseURI"].split('/')[-1]
@@ -145,7 +145,8 @@ def generate_triples():
                        drugs_node = URIRef(MYNS[drugs_identifier])
                        my_kg.add((target_uri,SCHEMA['drug'],drugs_node))
                        my_kg.add((drugs_node,RDF.type,drug_uri))
-                       my_kg.add((drugs_node,SCHEMA['name'],Literal(value['BrandName'])))
+                       if 'BrandName' in value and len(value['BrandName']) > 0:
+                        my_kg.add((drugs_node,SCHEMA['name'],Literal(value['BrandName'])))
                        my_kg.add((drugs_node, SCHEMA['nonProprietaryName'],Literal(value['GenericName'])))
 
                        if 'DrugAdministration' in value and len(value['DrugAdministration']) > 0:
@@ -170,7 +171,7 @@ def generate_triples():
 
 
 
-    my_kg.serialize('disease_schema_test.ttl', format='turtle')
+    my_kg.serialize('/Users/pratheek/Documents/Medi_Knowledge_Graph/OutputFiles/Medigraph_triples.ttl', format='turtle')
 
 if __name__ == '__main__':
     generate_triples()
