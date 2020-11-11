@@ -1,0 +1,41 @@
+For each of the below records, we do the following:
+1) Check the disease details, its description triple, the drug triples, its name triple, causes triple, symptoms triple and the speciality triple.
+  2) Now for each of the listed URIs of drugs, we check the following triples: brand name, generic name, uses, side effects, mode of administration.
+    3) For each of the health specialities, we pick the speciality URI, and then pick 5 doctors from that list.
+      4) Now for each doctor, we verify the doctor triples such as name, age, gender, telephone number, address and scores(user ratings).
+        Note: Given an eg in report of here even after using careful linkage and blocking techniques, some specialities such as 'hematology' and 'dermatology' get mixed.
+
+1) myns:Q1004647 a myns:disease ;
+    schema:description "autoimmune disease of skin and connective tissue characterized by large blisters" ;
+    schema:drug myns:Q11426176,
+        myns:Q3976827,
+        myns:Q412323,
+        myns:Q422232,
+        myns:Q424972,
+        myns:Q4567614 ;
+    schema:name "bullous pemphigoid" ;
+    schema:relevantSpeciality myns:dermatology .
+
+2) myns:Q172941 a myns:disease ;
+    myns:Cause "Helicobacter pylori infectious disease",
+        "non-steroidal anti-inflammatory drug" ;
+    schema:description "ulcer of an area of the gastrointestinal tract" ;
+    schema:drug myns:Q23767,
+        myns:Q254296,
+        myns:Q286846,
+        myns:Q3275451,
+        myns:Q407548,
+        myns:Q411917,
+        myns:Q413762,
+        myns:Q419991,
+        myns:Q422210,
+        myns:Q5018826,
+        myns:Q5132472,
+        myns:Q553223,
+        myns:Q620730 ;
+    schema:name "peptic ulcer disease" ;
+    schema:relevantSpeciality myns:gastroenterology ;
+    schema:signOrSymptom "epigastric pain",
+        "heartburn",
+        "hematemesis",
+        "melena" .

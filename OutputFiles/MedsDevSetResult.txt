@@ -1,0 +1,6 @@
+precison: 1.0 recall: 0.96875 f-measure: 0.9841269841269841
+Trial statistics based on Ground-Truth from development set data:
+tp: 0.968750 [31]
+fp: 0.000000 [0]
+tn: 1.000000 [992]
+fn: 0.031250 [1]
