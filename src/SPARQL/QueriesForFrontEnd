@@ -1,0 +1,59 @@
+1) Medicine query
+
+PREFIX schema: <http://schema.org/>
+PREFIX myns: <http://inf558.org/medgraph#>
+
+select ?gen_name ?brand_name ?uses ?side_eff ?admin
+where
+{
+?x a myns:Drugs;
+   schema:nonProprietaryName ?gen_name;
+   schema:name ?brand_name.
+OPTIONAL{?x  myns:Uses ?uses}.
+OPTIONAL{?x  myns:side_effect ?side_eff}.
+OPTIONAL{?x schema:administrationRoute ?admin}.
+ }
+LIMIT 10
+
+
+2) Disease query
+
+PREFIX schema: <http://schema.org/>
+PREFIX myns: <http://inf558.org/medgraph#>
+
+select ?disease_name ?info ?cause ?symptom ?med_name ?specialty_name
+where
+{
+?x a myns:disease;
+   schema:name ?disease_name;
+  	schema:description ?info;
+   schema:drug ?drug_uri;
+   schema:relevantSpeciality ?specialty_uri.
+OPTIONAL{?x  myns:Cause ?cause}.
+OPTIONAL{?x  schema:signOrSymptom ?symptom}.
+?drug_uri schema:nonProprietaryName ?med_name.
+?specialty_uri schema:name ?specialty_name.
+ }
+
+3) Health Specialty Query
+
+PREFIX schema: <http://schema.org/>
+PREFIX myns: <http://inf558.org/medgraph#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+select  ?specialty_name ?doc_name ?doc_age ?doc_gender ?doc_address ?doc_telephone ?doc_score
+where
+{
+?x a myns:Specialty;
+	schema:name ?specialty_name;
+	myns:doctors ?doctor_uri.
+?doctor_uri schema:name ?doc_name;
+            schema:address ?doc_address;
+            schema:telephone ?doc_telephone;
+            myns:score ?doc_score.
+  			FILTER (str(?doc_score) != "Not rated yet").
+OPTIONAL{?doctor_uri  myns:age ?doc_age}.
+OPTIONAL{?doctor_uri   schema:gender ?doc_gender}.
+
+ }
+ORDER BY DESC(?doc_score)
