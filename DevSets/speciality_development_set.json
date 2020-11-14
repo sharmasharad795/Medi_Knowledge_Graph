@@ -10,7 +10,7 @@
  "https://www.healthgrades.com/physician/dr-jonathan-eskenazi-y9tsj2z",
  "https://www.healthgrades.com/physician/dr-sebina-bulic-ggb42",
  "https://www.healthgrades.com/physician/dr-patrick-lyden-22yqb",
- https://www.healthgrades.com/physician/dr-evan-allgood-y9phmrz
+ "https://www.healthgrades.com/physician/dr-evan-allgood-y9phmrz"
 ],
 
 "nutrition":[
@@ -21,6 +21,7 @@
  "https://www.healthgrades.com/providers/erin-feldman-7k4az",
   "https://www.healthgrades.com/providers/diana-saikali-x9kg8",
   "https://www.healthgrades.com/providers/monika-ressel-xymrqkd"
+],
 
  "Ophthalmology":[
   "https://www.healthgrades.com/physician/dr-fred-kurata-xh8sm",
@@ -61,7 +62,7 @@
 
 
  ]
- 
+
 
 
 }
