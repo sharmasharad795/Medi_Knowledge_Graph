@@ -1,5 +1,6 @@
 ##medicine
 from SPARQLWrapper import SPARQLWrapper, JSON
+import re
 
 sparql = SPARQLWrapper("http://localhost:3030/ds")
 
@@ -16,7 +17,7 @@ def get_medicine_details(med_name):
     OPTIONAL{?x  myns:Uses ?uses}.
     OPTIONAL{?x  myns:side_effect ?side_eff}.
     OPTIONAL{?x schema:administrationRoute ?admin}.
-    FILTER regex(?gen_name,""" + '"' + med_name + '"' + """).
+    FILTER regex(?gen_name,LCASE(""" + '"' + med_name + '"' + """)).
     }""")
 
     sparql.setReturnFormat(JSON)
@@ -39,7 +40,15 @@ def get_medicine_details(med_name):
         if 'uses' in res:
             uses.add(res['uses']['value'].title())
         if 'side_eff' in res:
-            side_effect.add(res['side_eff']['value'].title())
+            temp = re.sub(r'\([^)]*\)', ' ', res['side_eff']['value'].title())
+            temp = temp.strip(',')
+            temp = temp.strip('"')
+            if temp =='Treatment':
+                continue
+            if temp == "Breath" or temp=="Shortness":
+                side_effect.add('Shortness of Breath')
+                continue
+            side_effect.add(temp)
         if 'admin' in res:
             admin_route.add(res['admin']['value'].title())
 
@@ -87,7 +96,7 @@ def get_disease_details(dis_name):
      ?x  schema:relevantSpeciality ?sp_uri.
     ?sp_uri  schema:name ?specialty_name. }
 
-    FILTER (?disease_name=""" + '"' + dis_name + '"' + """)  
+    FILTER (LCASE(?disease_name)=LCASE(""" + '"' + dis_name + '"' + """) ) 
      }
     """)
     disease_name = set()
@@ -107,7 +116,7 @@ def get_disease_details(dis_name):
         if 'disease_name' in res:
             disease_name.add(res['disease_name']['value'].title())
         if 'info' in res:
-            info.add(res['info']['value'].title())
+            info.add(res['info']['value'])
         if 'cause' in res:
             cause.add(res['cause']['value'].title())
         if 'symptom' in res:
@@ -155,7 +164,7 @@ def get_disease_from_symptoms(symptoms):
           ?x a myns:disease;
              schema:name ?disease_name.
           {?x schema:signOrSymptom ?symptom.}
-          FILTER (?symptom=""" + '"' + symptom + '"' + """)
+          FILTER (LCASE(?symptom)=LCASE(""" + '"' + symptom + '"' + """))
         }  
 
         """)
@@ -186,7 +195,7 @@ def get_disease_from_cause(causes):
           ?x a myns:disease;
              schema:name ?disease_name.
           {?x myns:Cause ?cause.}
-          FILTER (?cause=""" + '"' + cause + '"' + """)
+          FILTER (LCASE(?cause)=LCASE("""+'"'+ cause+'"'+"""))
         }  
 
         """)
@@ -218,7 +227,7 @@ def get_medicine_from_uses(uses):
               schema:nonProprietaryName ?drugs_name.
 
           {?x myns:Uses ?use.}
-          FILTER (?use=""" + '"' + use + '"' + """)
+          FILTER (LCASE(?use)=LCASE(""" + '"' + use + '"' + """))
         }  
 
         """)
@@ -258,7 +267,7 @@ def get_specialty_details(specialty_name,scorer):
     ?doctor_uri   schema:gender ?doc_gender.}}
     FILTER (str(?doc_score) != "Not rated yet").
     FILTER (str(?doc_score) >= """ + '"' + scorer + '"' + """).
-    FILTER (?specialty_name=""" + '"' + specialty_name + '"' + """)
+    FILTER (LCASE(?specialty_name)=LCASE(""" + '"' + specialty_name + '"' + """))
      }
     ORDER BY (?doc_score)
     """)

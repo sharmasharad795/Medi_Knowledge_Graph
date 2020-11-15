@@ -46,10 +46,10 @@ li{
 .third_block{
   float:left;
   border: 2px solid black;
-  padding-right: 20px;
+  padding-right: 25px;
   width:33%;
   height:650px;
-  margin-left:20px;
+  margin-left:30px;
   border-radius:10px;
   padding-left:8px ;
   background-color: black;
@@ -248,28 +248,31 @@ button{margin-left:1300px;}
           {% for x in result['disease_name'] %}
         <p style="font-family:Arial; font-size:18px; margin-left:0px;">{{ x }}</p>
           {% endfor %}
+      </div>
 
-        </div>
+
         {% endif %}
+
       {% if 'info' in result %}
     <div class="disease_name"><h4>Description</h4>
 
           {% for x in result['info'] %}
-        <p style="font-family:Arial; font-size:18px; margin-left:0px;">{{ x }}</p>
+        <p style="font-family:Arial; font-size:18px; margin-left:5px;">{{ x }}</p>
           {% endfor %}
 
         </div>
       {% endif %}
      {% if 'specialty_name' in result %}
-    <div class="gen_name"><h4>Specialty</h4>
+    <div class="disease_name"><h4>Specialty</h4>
 
           {% for x in result['specialty_name'] %}
         <p style="font-family:Arial; font-size:18px; margin-left:0px;">{{ x }}</p>
           {% endfor %}
 
         </div>
-    </div>
+
     {% endif %}
+        </div>
      {% if 'symptom' in result %}
     <div class="second_block">
 
@@ -282,8 +285,9 @@ button{margin-left:1300px;}
       </ul>
         </div>
 
-    </div>
+
     {% endif %}
+        </div>
 
      {% if 'med_name' in result %}
     <div class="third_block">
@@ -292,13 +296,14 @@ button{margin-left:1300px;}
       <ul>
 
           {% for x in result['med_name'] %}
-       <li style="font-family:Arial; font-size:18px; margin-left:-15px;">{{ x }}</li>
+       <li style="font-family:Arial; font-size:18px; margin-left:-25px;">{{ x }}</li>
           {% endfor %}
       </ul>
         </div>
 
-    </div>
+
     {% endif %}
+        </div>
 
 
 

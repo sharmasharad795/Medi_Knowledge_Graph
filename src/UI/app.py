@@ -82,8 +82,10 @@ def get_medicine_from_uses():
 
 @app.route('/disease_filter',methods=['POST','GET'])
 def get_disease_details():
-    disease = request.form['text']
+    disease = request.form['text'].strip()
+    print(disease)
     result = sparql_queries.get_disease_details(disease)
+    print(result)
     return render_template('disease.html',result=result)
 @app.route('/symptom_filter',methods=['POST','GET'])
 def get_symptom_filter():
