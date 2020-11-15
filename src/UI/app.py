@@ -63,6 +63,48 @@ def  get_health_specialty():
     return render_template('specialty.html',tables=[doctor_df.to_html(classes='data',header="true",index=False)])
 
 
+@app.route('/drug_filter',methods=['POST','GET'])
+def get_medicine_details():
+    drug = request.form['text']
+    result = sparql_queries.get_medicine_details(drug)
+
+    return render_template('drugs.html',result=result)
+@app.route('/uses_filter',methods=['POST','GET'])
+def get_medicine_from_uses():
+    uses = request.form['text']
+    uses = uses.split(',')
+
+    result = list(sparql_queries.get_medicine_from_uses(uses))
+    if len(result) > 25:
+        result=result[:25]
+
+    return render_template('uses.html',result=result)
+
+@app.route('/disease_filter',methods=['POST','GET'])
+def get_disease_details():
+    disease = request.form['text']
+    result = sparql_queries.get_disease_details(disease)
+    return render_template('disease.html',result=result)
+@app.route('/symptom_filter',methods=['POST','GET'])
+def get_symptom_filter():
+    symptom = request.form['text']
+    symptom = symptom.split(',')
+    result = list(sparql_queries.get_disease_from_symptoms(symptom))
+    if len(result) > 25:
+        result = result[:25]
+
+    return render_template('symptoms.html', result=result)
+
+
+@app.route('/cause_filter', methods=['POST', 'GET'])
+def get_cause_filter():
+    cause = request.form['text']
+    cause = cause.split(',')
+    result = list(sparql_queries.get_disease_from_cause(cause))
+    if len(result) > 25:
+        result = result[:25]
+
+    return render_template('cause.html', result=result)
 
 
 if __name__ == '__main__':

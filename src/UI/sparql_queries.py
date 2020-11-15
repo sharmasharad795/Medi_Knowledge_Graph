@@ -3,7 +3,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 
 sparql = SPARQLWrapper("http://localhost:3030/ds")
 
-def get_med_details(med_name):
+def get_medicine_details(med_name):
     sparql.setQuery("""
     PREFIX schema: <http://schema.org/>
     PREFIX myns: <http://inf558.org/medgraph#>
@@ -50,14 +50,17 @@ def get_med_details(med_name):
         final_res['brand_name'] = brand_name
 
     if len(uses) > 0:
+        if len(uses) > 15:
+            uses = list(uses)[:15]
         final_res['uses'] = uses
 
     if len(side_effect) > 0:
+        if len(side_effect) > 15:
+            side_effect = list(side_effect)[:15]
         final_res['side_effect'] = side_effect
     if len(admin_route) > 0:
         final_res['admin_route'] = admin_route
 
-    print(result)
     return final_res
 
 
@@ -124,8 +127,12 @@ def get_disease_details(dis_name):
         final_res['cause'] = cause
 
     if len(symptom) > 0:
+        if len(symptom) > 15:
+            symptom = list(symptom)[:15]
         final_res['symptom'] = symptom
     if len(med_name) > 0:
+        if len(med_name) > 15:
+            med_name = list(med_name)[:15]
         final_res['med_name'] = med_name
     if len(specialty_name) > 0:
         final_res['specialty_name'] = specialty_name
@@ -133,59 +140,6 @@ def get_disease_details(dis_name):
     return final_res
 
 
-def get_specialty_details(specialty_name):
-
-    sparql.setQuery("""
-    PREFIX schema: <http://schema.org/>
-    PREFIX myns: <http://inf558.org/medgraph#>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-    select  ?specialty_name ?doc_name ?doc_age ?doc_gender ?doc_address ?doc_telephone ?doc_score
-    where
-    {
-    ?x a myns:Specialty;
-        schema:name ?specialty_name;
-    OPTIONAL{
-    ?x myns:doctors ?doctor_uri.
-    OPTIONAL{
-    ?doctor_uri schema:name ?doc_name.
-    ?doctor_uri  schema:address ?doc_address.
-    ?doctor_uri  schema:telephone ?doc_telephone.
-    ?doctor_uri  myns:score ?doc_score.
-    ?doctor_uri  myns:age ?doc_age.
-    ?doctor_uri   schema:gender ?doc_gender.}}
-    FILTER (str(?doc_score) != "Not rated yet").
-      FILTER (?specialty_name=""" + '"' + specialty_name + '"' + """)
-     }
-    ORDER BY DESC(?doc_score)
-    """)
-
-
-    sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
-    return results
-
-
-def get_specialty_details(specialty_name):
-    sparql.setQuery("""
-    PREFIX schema: <http://schema.org/>
-    PREFIX myns: <http://inf558.org/medgraph#>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-    select  ?specialty_name ?doc_name ?doc_age ?doc_gender ?doc_address ?doc_telephone ?doc_score
-    where
-    {
-    ?x a myns:Drugs;
-        schema:name ?specialty_name;
-
-      FILTER (?specialty_name=""" + '"' + specialty_name + '"' + """)
-     }
-    ORDER BY DESC(?doc_score)
-    """)
-
-    sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
-    return results
 
 
 def get_disease_from_symptoms(symptoms):
@@ -209,7 +163,7 @@ def get_disease_from_symptoms(symptoms):
         results = sparql.query().convert()
         temp_set = set()
         for result in results['results']['bindings']:
-            temp_set.add(result['disease_name']['value'])
+            temp_set.add(result['disease_name']['value'].strip())
         if cnt == 0:
             main_set = (temp_set)
         else:

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Medigraph Main Page</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+li{
+    font-size: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+.disease {
+  margin-bottom: 2px;
+  margin-left: 30px;
+}
+.first_block{
+  float:left;
+  border: 2px solid black;
+  padding-right: 20px;
+  width:27%;
+  height:650px;
+  margin-right:-20px;
+  border-radius:10px;
+  padding-left:5px ;
+  background-color: black;
+  color:white;
+
+}
+.second_block{
+  float:left;
+  border: 2px solid black;
+  padding-right: 20px;
+  width:30%;
+  height:650px;
+  margin-left:50px;
+  border-radius:10px;
+  padding-left:8px ;
+  background-color: black;
+  color:white;
+}
+
+.third_block{
+  float:left;
+  border: 2px solid black;
+  padding-right: 20px;
+  width:33%;
+  height:650px;
+  margin-left:20px;
+  border-radius:10px;
+  padding-left:8px ;
+  background-color: black;
+  color:white;
+
+}
+
+.gen_name{
+  margin-bottom: 50px;
+}
+.content{
+  margin-left:10px;
+  font_size:10px;
+}
+
+.disease_box{
+  width: 102%;
+  padding: 5px;
+  border: 2px solid white;
+  margin-bottom:20px;
+  background-color: white;
+  border-radius: 5px;
+  padding-bottom:20px;
+}
+.header_box{
+  text-align: center;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: black;
+  padding: 10px;
+  text-align: center;
+  font-size: 15px;
+  color: white;
+  border: 5px solid white;
+  border-radius:15px;
+  width:100%;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 25%;
+  height: 700px; /* only for demonstration, should be removed */
+  background: #ccc;
+  padding: 20px;
+  border: 2px solid white;
+  background-color: black;
+  border-radius:15px;
+
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0px;
+}
+h3{
+  color:black;
+}
+article {
+  float: left;
+  padding: 20px;
+  width: 75%;
+  background-color: #f1f1f1;
+  height: 700px;
+  border: 2px solid black;
+  border-radius:15px;
+   /* only for demonstration, should be removed */
+}
+
+/* Clear floats after the columns */
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+  height:720px;
+
+}
+input[name=text]{
+width: 170px;
+height:40px;
+border-radius: 5px;
+}
+p{
+margin-left:60px;}
+
+input[type=submit] {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+input[type=range] {
+
+  margin-left:80px;
+}
+select{
+  margin-left:80px;
+}
+button{margin-left:1300px;}
+
+</style>
+</head>
+<body style="overflow:hidden;">
+
+<header>
+  <h1>MediGraph</h1>
+  <button class="button" onclick="window.location.href = 'http://127.0.0.1:8080'">Home Page</button>
+</header>
+
+<section>
+  <nav>
+    <ul>
+    <div class='disease_box'>
+      <div class='header_box'><h3>DISEASE</h3></div>
+      <div class="disease">
+        <form method="POST" action="disease_filter" >
+          <input name="text" placeholder="What's your disease?">
+          <input type="submit" value='Name'>
+        </form>
+      </div>
+
+      <div class="disease">
+        <form method="POST" action="cause_filter" >
+          <input name="text" placeholder="What's the cause?">
+          <input type="submit" value='Cause'>
+        </form>
+      </div>
+
+      <div class="disease">
+        <form method="POST" action="symptom_filter" >
+          <input name="text" placeholder="What's the symptom?">
+          <input type="submit" value='Symptom'>
+        </form>
+      </div>
+    </div>
+
+    <div class='disease_box'>
+      <div class='header_box'><h3>DRUGS</h3></div>
+      <div class="disease">
+        <form method="POST" action="drug_filter" >
+          <input name="text" placeholder="What's your drug?">
+          <input type="submit" value='Name'>
+        </form>
+      </div>
+
+      <div class="disease">
+        <form method="POST" action="uses_filter" >
+          <input name="text" placeholder="What are the drug uses?">
+          <input type="submit" value='Conditions'>
+        </form>
+      </div>
+    </div>
+
+    <div class='disease_box'>
+      <div class='header_box'><h3>HEALTH SPECIALTY</h3></div>
+      <div class="disease">
+        <form method="POST" action="doc_filter" >
+          <input name="text" placeholder="What's the health specialty?">
+          <input type="submit" value='Name'>
+        </form>
+      </div>
+
+        <div class ="disease">
+        <p>Doctor Ratings</p>
+       <select name="Dropdown1">
+        <option value="1+">1+</option>
+        <option value="2+">2+</option>
+        <option value="3+">3+</option>
+        <option value="4+">4+</option>
+        </select>
+      </div>
+    </div>
+  </ul>
+  </nav>
+
+  <article>
+    {% block content %}
+    <div class="first_block">
+       {% if 'gen_name' in result %}
+      <div class="gen_name"><h4>Generic Name</h4>
+
+          {% for x in result['gen_name'] %}
+        <p style="font-family:Arial; font-size:18px; margin-left:0px;">{{ x }}</p>
+          {% endfor %}
+
+        </div>
+        {% endif %}
+      {% if 'brand_name' in result %}
+    <div class="gen_name"><h4>Brand Name</h4>
+
+          {% for x in result['brand_name'] %}
+        <p style="font-family:Arial; font-size:18px; margin-left:0px;">{{ x }}</p>
+          {% endfor %}
+
+        </div>
+      {% endif %}
+     {% if 'admin_route' in result %}
+    <div class="gen_name"><h4>Administration Route</h4>
+
+          {% for x in result['admin_route'] %}
+        <p style="font-family:Arial; font-size:18px; margin-left:0px;">{{ x }}</p>
+          {% endfor %}
+
+        </div>
+    </div>
+    {% endif %}
+     {% if 'uses' in result %}
+    <div class="second_block">
+
+    <div class="gen_name"><h4>Uses</h4>
+      <ul>
+
+          {% for x in result['uses'] %}
+       <li style="font-family:Arial; font-size:18px; margin-left:-25px;">{{ x }}</li>
+          {% endfor %}
+      </ul>
+        </div>
+
+    </div>
+    {% endif %}
+
+     {% if 'side_effect' in result %}
+    <div class="third_block">
+
+    <div class="gen_name"><h4>Side Effects</h4>
+      <ul>
+
+          {% for x in result['side_effect'] %}
+       <li style="font-family:Arial; font-size:18px; margin-left:-15px;">{{ x }}</li>
+          {% endfor %}
+      </ul>
+        </div>
+
+    </div>
+    {% endif %}
+
+
+
+    {% endblock content %}
+
+
+  </article>
+</section>
+
+
+
+</body>
+</html>
