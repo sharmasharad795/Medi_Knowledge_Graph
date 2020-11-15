@@ -10,18 +10,18 @@ def index():
 @app.route('/doc_filter',methods=['POST','GET'])
 def  get_health_specialty():
     specialty = request.form['text']
-    # #score = request.form["Dropdown1"]
-    # print(score)
-    # if score =='1+':
-    #     score = '1.0'
-    # elif score =='2+':
-    #     score ='2.0'
-    # elif score =='3+' :
-    #     score = '3.0'
-    # elif score == '4+':
-    #     score =='4.0'
+    score = request.form["Dropdown1"]
+    print(score)
+    if score =='1+':
+        score = '1.0'
+    elif score =='2+':
+        score ='2.0'
+    elif score =='3+' :
+        score = '3.0'
+    elif score == '4+':
+        score =='4.0'
 
-    result = sparql_queries.get_specialty_details(specialty,"2.0")
+    result = sparql_queries.get_specialty_details(specialty,score)
     doc_name = []
     doc_address = []
     doc_telephone = []
@@ -57,8 +57,8 @@ def  get_health_specialty():
             doc_score.append(res['doc_score']['value'].title())
         else:
             doc_score.append('Not Available')
-    doctor_df = pd.DataFrame({'Doctor_Name':doc_name,'Doctor_Age':doc_age,'Doctor_Gender':doc_gender,
-                              'Doctor_Address':doc_address, 'Doctor_Telephone': doc_telephone, 'Doctor_Score':doc_score
+    doctor_df = pd.DataFrame({'Doctor Name':doc_name,'Doctor Age':doc_age,'Doctor Gender':doc_gender,
+                              'Doctor Address':doc_address, 'Doctor Telephone': doc_telephone, 'Doctor Score':doc_score
                               })
     return render_template('specialty.html',tables=[doctor_df.to_html(classes='data',header="true",index=False)])
 
@@ -66,4 +66,4 @@ def  get_health_specialty():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8090)
+    app.run(debug=True, port=8080)

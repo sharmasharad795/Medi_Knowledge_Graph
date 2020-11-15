@@ -5,6 +5,45 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+
+table
+  {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+ }
+
+td, th {
+  border: 1px solid black;
+
+  padding: 8px;
+}
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: white;
+  color: black;
+  position: sticky ;
+  top: 0;
+}
+
+tr:nth-child(even){background-color: white;}
+
+tr:nth-child(odd){background-color:black;color:white}
+
+div.tableContainer {
+
+  clear: both;
+  border: 1px solid #963;
+  height: 670px;
+  overflow: auto;
+
+  margin-top: 10px;
+  margin-bottom: 50px;
+  margin-right: 3px;
+  margin-left: 3px
+  }
+
 * {
   box-sizing: border-box;
 }
@@ -166,21 +205,20 @@ select{
     <div class='disease_box'>
       <div class='header_box'><h3>HEALTH SPECIALTY</h3></div>
       <div class="disease">
-          <form method="POST" action="doc_filter" >
-          <input name="text" placeholder="What's the health specialty?"/>
-
-
-
-          <p>Doctor Ratings</p>
-         <select name="Dropdown1">
-          <option value="1+">1+</option>
-          <option value="2+">2+</option>
-          <option value="3+">3+</option>
-          <option value="4+">4+</option>
-         </select>
-          <input type="submit" value='Name' />
-
+        <form method="POST" action="doc_filter" >
+          <input name="text" placeholder="What's the health specialty?">
+          <input type="submit" value='Name'>
         </form>
+      </div>
+
+        <div class ="disease">
+        <p>Doctor Ratings</p>
+       <select name="Dropdown1">
+        <option value="1+">1+</option>
+        <option value="2+">2+</option>
+        <option value="3+">3+</option>
+        <option value="4+">4+</option>
+        </select>
       </div>
     </div>
   </ul>
