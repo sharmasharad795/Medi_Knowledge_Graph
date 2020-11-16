@@ -269,7 +269,7 @@ def get_specialty_details(specialty_name,scorer):
     FILTER (str(?doc_score) >= """ + '"' + scorer + '"' + """).
     FILTER (LCASE(?specialty_name)=LCASE(""" + '"' + specialty_name + '"' + """))
      }
-    ORDER BY (?doc_score)
+    ORDER BY DESC(?doc_score)
     """)
 
 

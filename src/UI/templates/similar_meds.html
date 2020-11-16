@@ -5,66 +5,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-
-li{
-    font-size: 20px;
-}
-
 * {
   box-sizing: border-box;
 }
-.disease {
-  margin-bottom: 2px;
-  margin-left: 30px;
-}
-.first_block{
-  float:left;
-  border: 2px solid black;
-  padding-right: 20px;
-  width:27%;
-  height:650px;
-  margin-right:-20px;
-  border-radius:10px;
-  padding-left:5px ;
-  background-color: black;
-  color:white;
-
-}
-.second_block{
-  float:left;
-  border: 2px solid black;
-  padding-right: 20px;
-  width:30%;
-  height:650px;
-  margin-left:50px;
-  border-radius:10px;
-  padding-left:8px ;
-  background-color: black;
-  color:white;
-}
-
-.third_block{
-  float:left;
-  border: 2px solid black;
-  padding-right: 25px;
-  width:33%;
-  height:650px;
+.disease{
+  margin-bottom:2px;
   margin-left:30px;
-  border-radius:10px;
-  padding-left:8px ;
-  background-color: black;
-  color:white;
 
 }
-
-.disease_name{
-  margin-bottom: 50px;
-}
-.content{
-  margin-left:10px;
-  font_size:10px;
-}
-
 .disease_box{
   width: 102%;
   padding: 5px;
@@ -163,7 +111,6 @@ select{
   margin-left:80px;
 }
 button{margin-left:1300px;}
-
 </style>
 </head>
 <body style="overflow:hidden;">
@@ -223,7 +170,7 @@ button{margin-left:1300px;}
         <form method="POST" action="doc_filter" >
           <input name="text" placeholder="What's the health specialty?">
           <input type="submit" value='Name'>
-        </form>
+
       </div>
 
         <div class ="disease">
@@ -234,6 +181,7 @@ button{margin-left:1300px;}
         <option value="3+">3+</option>
         <option value="4+">4+</option>
         </select>
+        </form>
       </div>
     </div>
   </ul>
@@ -241,94 +189,16 @@ button{margin-left:1300px;}
 
   <article>
     {% block content %}
-    <div class="first_block">
-       {% if 'disease_name' in result %}
-      <div class="disease_name"><h4>Disease Name</h4>
-
-          {% for x in result['disease_name'] %}
-        <p style="font-family:Arial; font-size:18px; margin-left:0px;">{{ x }}</p>
-          {% endfor %}
-      </div>
-
-
-        {% endif %}
-
-      {% if 'info' in result %}
-    <div class="disease_name"><h4>Description</h4>
-
-          {% for x in result['info'] %}
-        <p style="font-family:Arial; font-size:18px; margin-left:5px;">{{ x }}</p>
-          {% endfor %}
-
-        </div>
-      {% endif %}
-     {% if 'specialty_name' in result %}
-    <div class="disease_name"><h4>Specialty</h4>
-
-          {% for x in result['specialty_name'] %}
-        <p style="font-family:Arial; font-size:18px; margin-left:0px;">{{ x }}</p>
-          {% endfor %}
-
-        </div>
-
-    {% endif %}
-        </div>
-     {% if 'symptom' in result or 'cause' in result %}
-    <div class="second_block">
-        {% if 'cause' in result%}
-
-    <div class="disease_name"><h4>Cause</h4>
-      <ul>
-
-          {% for x in result['cause'] %}
-       <li style="font-family:Arial; font-size:18px; margin-left:-25px;">{{ x }}</li>
-          {% endfor %}
-      </ul>
-
-
-        </div>
-         {% endif %}
-
-
-        {% if 'symptom' in result%}
-
-    <div class="disease_name"><h4>Symptom</h4>
-      <ul>
-
-          {% for x in result['symptom'] %}
-       <li style="font-family:Arial; font-size:18px; margin-left:-25px;">{{ x }}</li>
-          {% endfor %}
-      </ul>
-
-
-        </div>
-         {% endif %}
-
-
-
-        </div>
-       {% endif %}
-
-     {% if 'med_name' in result %}
-    <div class="third_block">
-
-    <div class="disease_name"><h4>Medicines used for treatment</h4>
-      <ul>
-
-          {% for x in result['med_name'] %}
-       <li style="font-family:Arial; font-size:18px; margin-left:-25px;">{{ x }}</li>
-          {% endfor %}
-      </ul>
-        </div>
-
-
-    {% endif %}
-        </div>
-
+    <h1> Similar Medicines </h1>
+    <h3>{{ result['disease'] }} </h3>
+    <ul>
+    {% for x in result['meds'] %}
+  <li style="font-family:Arial; font-size:18px; margin-left:-19px;">{{ x }}</li>
+    {% endfor %}
+  </ul>
 
 
     {% endblock content %}
-
 
   </article>
 </section>
