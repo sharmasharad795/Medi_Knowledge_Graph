@@ -5,11 +5,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-
-li{
-    font-size: 20px;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -116,7 +111,6 @@ select{
   margin-left:80px;
 }
 button{margin-left:1300px;}
-
 </style>
 </head>
 <body style="overflow:hidden;">
@@ -176,7 +170,7 @@ button{margin-left:1300px;}
         <form method="POST" action="doc_filter" >
           <input name="text" placeholder="What's the health specialty?">
           <input type="submit" value='Name'>
-        </form>
+
       </div>
 
         <div class ="disease">
@@ -187,18 +181,24 @@ button{margin-left:1300px;}
         <option value="3+">3+</option>
         <option value="4+">4+</option>
         </select>
+        </form>
       </div>
     </div>
   </ul>
   </nav>
 
   <article>
-      <h2>Disease Names</h2>
+    {% block content %}
+    <h1> Similar Medicines </h1>
+    <h3>{{ result['disease'] }} </h3>
     <ul>
-      {% for x in result %}
-        <li>{{ x }}</li>
-      {% endfor %}
-    </ul>
+    {% for x in result['meds'] %}
+  <li style="font-family:Arial; font-size:18px; margin-left:-19px;">{{ x }}</li>
+    {% endfor %}
+  </ul>
+
+
+    {% endblock content %}
 
   </article>
 </section>

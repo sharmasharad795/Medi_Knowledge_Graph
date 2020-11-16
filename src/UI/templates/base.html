@@ -110,13 +110,25 @@ input[type=range] {
 select{
   margin-left:80px;
 }
+.sim_diseases{
+  margin-left: 750px;
+  margin-right:2px;
+  margin-top:-50px;
+}
+.sim_meds{
 
+  width:300px;
+  margin-left: 750px;
+  margin-bottom: 70px;
+
+}
 </style>
 </head>
 <body style="overflow:hidden;">
 
 <header>
   <h1>MediGraph</h1>
+
 
 </header>
 
@@ -188,7 +200,19 @@ select{
   </nav>
 
   <article>
+    <div class="sim_meds">
+    <form method="POST" action="sim_meds" >
+      <input name="text" placeholder="What's the medicine?">
+      <input type="submit" value='Medicine'>
+    </form>
+  </div>
 
+  <div class="sim_diseases">
+  <form method="POST" action="sim_diseases" >
+    <input name="text" placeholder="What's the disease?">
+    <input type="submit" value='Disease'>
+  </form>
+</div>
   </article>
 </section>
 

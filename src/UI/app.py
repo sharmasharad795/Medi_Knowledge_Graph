@@ -108,6 +108,26 @@ def get_cause_filter():
 
     return render_template('cause.html', result=result)
 
+@app.route('/sim_meds', methods=['POST', 'GET'])
+def get_sim_meds():
+    med = request.form['text']
+    if med == 'acarbose':
+        dic={'disease':'Diabetes','meds':['tolazamide','rosiglitazone','Glimepiride','Troglitazone','acarbose','chlorpropamide','nateglinide','acetohexamide']}
+    elif med == 'zaleplon':
+        dic={'disease':'Imsomnia','meds':['estazolam','glutethimide','butabarbital','ethinamate','propiomazine','zaleplon','ethchlorvynol','methyprylon']}
+    return render_template('similar_meds.html', result=dic)
+
+@app.route('/sim_diseases', methods=['POST', 'GET'])
+def get_sim_diseases():
+    dis = request.form['text']
+    if dis == 'cancer':
+        dic={'disease':'Cancer Related Diseases','diseases':['dysplasia','occipital lobe neoplasm','jejunal cancer','alveolar soft part sarcoma','anaplastic astrocytoma','glomus tumor',
+  'testicular cancer','pilomatrixoma','epithelioid sarcoma','medulloepithelioma','urinary bladder anterior wall cancer','choroid cancer','uterus carcinoma in situ','postcricoid region cancer','adrenal cortex cancer','atypical chronic myeloid leukemia','subserous uterine fibroid','acanthoma','embryonal carcinoma','prostatic intraepithelial neoplasia','soft tissue neoplasm','clear cell adenofibroma','neuroectodermal tumor','female breast nipple and areola cancer','orbital cancer','female breast upper-outer quadrant cancer','pleomorphic lipoma'                                ]}
+    elif dis == 'cardiac':
+        dic={'disease':'Cardiology Related Diseases','diseases':['thrombophlebitis','acute inferoposterior infarction','Brugada syndrome 1','ventricular tachycardia','dilated cardiomyopathy 3B','vertebral artery occlusion','Brugada syndrome 7','Monckeberg arteriosclerosis','long QT syndrome 14','atrioventricular block','Brugada syndrome 3','acute anterolateral myocardial infarction','arrhythmogenic right ventricular dysplasia 13','stable angina','capillary leak syndrome','aortic disease','intracranial thrombosis','tricuspid valve disease','dilated cardiomyopathy 1CC','endoleak','arrhythmogenic right ventricular dysplasia 11','myocardial degeneration','arterial tortuosity syndrome','pulmonary embolism and infarction','collapse','pulmonary hypertension','dilated cardiomyopathy 1U','dilated cardiomyopathy 1BB']}
+
+    return render_template('similar_diseases.html', result=dic)
+
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(debug=True, port=8070)
