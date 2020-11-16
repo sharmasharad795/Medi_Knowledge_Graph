@@ -273,8 +273,24 @@ button{margin-left:1300px;}
 
     {% endif %}
         </div>
-     {% if 'symptom' in result %}
+     {% if 'symptom' in result or 'cause' in result %}
     <div class="second_block">
+        {% if 'cause' in result%}
+
+    <div class="disease_name"><h4>Cause</h4>
+      <ul>
+
+          {% for x in result['cause'] %}
+       <li style="font-family:Arial; font-size:18px; margin-left:-25px;">{{ x }}</li>
+          {% endfor %}
+      </ul>
+
+
+        </div>
+         {% endif %}
+
+
+        {% if 'symptom' in result%}
 
     <div class="disease_name"><h4>Symptom</h4>
       <ul>
@@ -283,11 +299,15 @@ button{margin-left:1300px;}
        <li style="font-family:Arial; font-size:18px; margin-left:-25px;">{{ x }}</li>
           {% endfor %}
       </ul>
-        </div>
 
 
-    {% endif %}
         </div>
+         {% endif %}
+
+
+
+        </div>
+       {% endif %}
 
      {% if 'med_name' in result %}
     <div class="third_block">
