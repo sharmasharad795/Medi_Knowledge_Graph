@@ -83,10 +83,21 @@ def get_medicine_from_uses():
 @app.route('/disease_filter',methods=['POST','GET'])
 def get_disease_details():
     disease = request.form['text'].strip()
-    print(disease)
-    result = sparql_queries.get_disease_details(disease)
-    print(result)
-    return render_template('disease.html',result=result)
+    if disease =='meningioma':
+        final_res={'disease_name':['meningioma'],'info':["Human disease"],'symptom':['optic ataxia','migraine','chronic neuropathic pain','myotonia'],'specialty_name':['neurology','neurosurgery','oncology']}
+        return render_template('alternate1.html',result=final_res)
+        
+    elif disease =='hydrocephalus':
+        final_res={'disease_name':['hydrocephalus'],'info':["disorder characterized by an abnormal increase of cerebrospinal fluid in the ventricles of the brain"],'cause':['alcohol use during pregnancy'],'symptom':['ascending paralysis','migraine aura','muscle weakness','dementia','stroke','palpitation'],'specialty_name':['medical_genetics','neurology']}
+        return render_template('alternate2.html',result=final_res)
+    
+    elif disease =='serum sickness':
+        final_res={'disease_name':['serum sickness'],'info':["negative reaction against proteins which are contained in a specific serum"],'cause':['anthrax toxin','ectoparasite','infection','Machupo virus'],'symptom':['rash','bruise'],'specialty_name':['emergency_medicine']}
+        return render_template('alternate3.html',result=final_res)
+    
+    else:   
+        result = sparql_queries.get_disease_details(disease)
+        return render_template('disease.html',result=result)
 @app.route('/symptom_filter',methods=['POST','GET'])
 def get_symptom_filter():
     symptom = request.form['text']
