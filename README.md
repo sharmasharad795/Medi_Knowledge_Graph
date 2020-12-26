@@ -14,3 +14,7 @@ We Crawled and extracted from a combination of structured unstructured and semi-
 2. Details related to meidicines was crawled from webmd.com such as it's generic name, brand name, side effects, mode of administration.
 3. Lastly, we crawled information pertaining to doctors specializing in treating a disease of certain kind from healthgrades.com such as doctor's name, age, gender,
 
+# 2. Information Extraction
+
+Since we dealt with unstructured and semi-structured data we had to design extractors(sybtactial) using tools like spacy to obtain relevant 
+
