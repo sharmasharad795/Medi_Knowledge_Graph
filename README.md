@@ -16,5 +16,5 @@ We Crawled and extracted from a combination of structured unstructured and semi-
 
 # 2. Information Extraction
 
-Since we dealt with unstructured and semi-structured data we had to design extractors(sybtactial) using tools like spacy to obtain relevant 
+Since we dealt with unstructured and semi-structured data we had to design extractors(syntactial) using tools like spacy to obtain relevant inforamtion about medicines such as it's side effects, uses 
 
