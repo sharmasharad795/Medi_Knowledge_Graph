@@ -30,13 +30,13 @@ the number of comparisons, we employed tri-gram blocking. The results were evalu
 
 2) Health Specialty: Each disease in WikiData could have one or multiple health specialties. These health specialties had to be mapped to the different health specialists or doctors on HealthGrades. One of the challenges here was that the names of these health specialties were different for both the data sources. For example, Hematology in WikiData should be mapped to Hematology as well as Pediatric Hematology & Oncology in HealthGrades. For this, we first filtered out the stop words such as care, disease, medicine, which would lead to many false matches. Then, we divided each specialty in both WikiData and healthgrades into separate strings, and carried out Levenshtein based matching between each of these strings. To reduce the number of comparisons, we employed fivegram blocking. The doctors were subsequently mapped to the matching similarities. The results were evaluated using a development set of 40 specialties.
 
-#4. Ontology
+# 4. Ontology
 
 It was difficult to construct a schema from scratch which could link different data sources effectively. Hence, we leveraged from the existing ontologies
 of XSD, RDF, RDFS, SCHEMA, as well as defined some of our own classes and properties. The custom classes were Diseases, Drugs, Health Specialty and
 Doctors. Additionally, we borrowed from Schema.org to build some of the properties for the above defined classes. For example, description of Diseases,administrationRoute of Drugs, etc. The custom defined properties include cause of Diseases, age of Doctors, etc. All our custom ontologies were defined using the ontology of MY_NS.
 
-#5. Graph Embeddings
+# 5. Graph Embeddings
 
 We noticed that in spite of linking data from various sources, a few diseases lacked their respective causes or symptoms in our knowledge graph. We
 employed link prediction using AmpliGraph’s Complex Embeddings model (ComplEx) to predict the missing linksbetween diseases and their symptoms. This
