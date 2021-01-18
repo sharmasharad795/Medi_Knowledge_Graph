@@ -1,7 +1,7 @@
 # Medi_Knowledge_Graph
 Knowledge Graph which serves as a one stop shop containing information pertaining to diseases, medicines and health specialists (doctors) related to the specific disease in a given area.
 
-# The knowlede graph that we built looks as follows:
+# The knowledge graph that we built looks as follows:
 ![Alt Text](https://github.com/pratheekbalaji/Medi_Knowledge_Graph/blob/main/example.jpg?raw=true)
 
 The different steps involved in building our knowledge graph is as described below:
